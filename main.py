@@ -25,8 +25,8 @@ async def hi(ctx, user):
 @bot.event
 async def on_ready():
     print("起動完了")
-    print(bot.user.name)  # Botの名前
-    print(bot.user.id)  # ID
+    print(bot.user.name)
+    print(bot.user.id)
     await bot.change_presence(activity=discord.Game(
         name="im sleepy"))
 
