@@ -1,8 +1,5 @@
 import requests as requests
 from discord.ext import commands
-import urllib.request
-import json
-import re
 
 
 class Weather(commands.Cog):
@@ -10,8 +7,9 @@ class Weather(commands.Cog):
         self.bot = bot
 
     @commands.slash_command()
-    async def weather(self, ctx, location: str = "Osaka,JP"):
-        weather = get_weather(location)
+    async def weather(self, ctx, location):
+        location = str(location)
+        weather = get_weather(location+',JP')
         if weather:
             response = '現在の{}の天気は{}です。気温は{}度、湿度は{}％です。'.format(location,
                                                                         weather['weather'][0]['description'],
