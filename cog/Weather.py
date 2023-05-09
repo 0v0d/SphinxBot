@@ -9,7 +9,7 @@ class Weather(commands.Cog):
     @commands.slash_command()
     async def weather(self, ctx, location):
         location = str(location)
-        weather = get_weather(location+',JP')
+        weather = get_weather(location + ',JP')
         if weather:
             response = '現在の{}の天気は{}です。気温は{}度、湿度は{}％です。'.format(location,
                                                                         weather['weather'][0]['description'],
