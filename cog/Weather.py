@@ -1,6 +1,11 @@
+import os
+
 import requests as requests
 from discord.ext import commands
+from dotenv import load_dotenv
 
+load_dotenv()
+API_KEY = os.environ.get("API_KEY")
 
 class Weather(commands.Cog):
     def __init__(self, bot):
@@ -22,11 +27,10 @@ class Weather(commands.Cog):
 
 
 def get_weather(location):
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=d9bfc49bd2376183a27205178f7815d7'.format(
-        location)
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={API_KEY}'
     response = requests.get(url)
-
     if response.status_code == 200:
         return response.json()
     else:
+        print('接続問題')
         return None
