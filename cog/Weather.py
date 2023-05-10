@@ -40,18 +40,16 @@ class Weather(commands.Cog):
 
 
 def get_weather(location):
-    url = f'http://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={API_KEY}'
-    response = requests.get(url)
+    response = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={API_KEY}')
     if response.status_code == 200:
         return response.json()
     else:
+        print('エラー')
         return None
 
 
 def get_daily_weather(location):
-    url = f"http://api.openweathermap.org/data/2.5/forecast?q={location}&units=metric&appid={API_KEY}"
-    response = requests.get(url)
-
+    response = requests.get(f"http://api.openweathermap.org/data/2.5/forecast?q={location}&units=metric&appid={API_KEY}")
     if response.status_code == 200:
         data = response.json()
         weather_data = []
@@ -63,9 +61,8 @@ def get_daily_weather(location):
             weather_data.append({
                 'time': time,
                 'temperature': temperature,
-                'weather': weather
-            })
-
+                'weather': weather })
         return weather_data
-
-    return None
+    else:
+        print('エラー')
+        return None
