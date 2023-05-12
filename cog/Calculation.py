@@ -5,7 +5,6 @@ class Calculator(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    ARGUMENTS_ERROR_MESSAGE = "引数が少なすぎます。2つ以上の数値を入力してください。"
     NUMERIC_ERROR_MESSAGE = "数値以外の入力がありました。数値を入力してください。"
     ZERO_DIVISION_ERROR_MESSAGE = "0で割ることはできません。別の数値を入力してください。"
 
@@ -52,4 +51,3 @@ class Calculator(commands.Cog):
             return
         result = numbers[0] / numbers[1]
         await ctx.respond(f"結果は{result}")
-
