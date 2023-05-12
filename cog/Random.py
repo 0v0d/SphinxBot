@@ -8,11 +8,10 @@ class Random(commands.Cog):
         self.bot = bot
 
     @commands.slash_command()
-    async def random(self, ctx, args='1,100'):
-        numbers = args.split(",")
+    async def random(self, ctx, min_val:str,max_val:str):
         try:
-            min_val = int(numbers[0])
-            max_val = int(numbers[1])
+            min_val = int(min_val)
+            max_val = int(max_val)
         except ValueError:
             await ctx.respond('Error')
             return
