@@ -7,7 +7,7 @@ class Random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(description="ランダムな数字を生成")
     async def random(self, ctx, min_val:str,max_val:str):
         try:
             min_val = int(min_val)

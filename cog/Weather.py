@@ -13,7 +13,7 @@ class Weather(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(description="現在の天気情報")
     async def weather_now(self, ctx, location):
         weather = get_weather(str(location) + ',JP')
         if weather:
@@ -23,7 +23,7 @@ class Weather(commands.Cog):
             response = f'{location}の天気を取得できませんでした。'
         await ctx.respond(response)
 
-    @commands.slash_command()
+    @commands.slash_command(description="4日間の天気情報")
     async def weather_daily(self, ctx, location):
         weather_data = get_daily_weather(str(location) + ',JP')
 
