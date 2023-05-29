@@ -52,7 +52,7 @@ class Calculator(commands.Cog):
         result = numbers[0] / numbers[1]
         await ctx.respond(f"結果は{result}")
 
-    @commands.slash_command(description="除算")
+    @commands.slash_command(description="商算")
     async def mod(self, ctx, a: str, b: str):
         numbers = await self.check_args(ctx, a, b)
         if numbers is None:
