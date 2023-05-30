@@ -1,6 +1,7 @@
 import os
-import requests
+
 import discord
+import requests as requests
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -20,7 +21,7 @@ class Weather(commands.Cog):
             weather = weather_data['weather'][0]['description']
             temp = weather_data['main']['temp']
             embed = discord.Embed(title=f"{location}の天気", color=discord.Color.blue())
-            embed.add_field(name="現在", value=f"天気: {weather} / 気温: {temp}℃", inline=False)
+            embed.add_field(name="現在", value=f"天気:{weather}/" f" 気温: {temp}℃", inline=False)
             await ctx.respond(embed=embed)
         else:
             await ctx.respond(f'{location}の天気を取得できませんでした。')
@@ -33,9 +34,9 @@ class Weather(commands.Cog):
             embed = discord.Embed(title=f"{location}の天気予報", color=discord.Color.blue())
             for data in weather_data:
                 time = data['time']
-                temp = data['temperature']
+                temperature = data['temperature']
                 weather = data['weather']
-                embed.add_field(name=time, value=f"天気: {weather} / 気温: {temp}℃", inline=False)
+                embed.add_field(name=time, value=f"天気: {weather} / 気温: {temperature}℃", inline=False)
             await ctx.respond(embed=embed)
         else:
             await ctx.respond('天気情報を取得できませんでした。')
