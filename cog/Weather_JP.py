@@ -1,3 +1,5 @@
+from typing import Any
+
 import discord
 import requests as requests
 from discord.ext import commands
@@ -5,17 +7,20 @@ from discord.ext import commands
 url: str = "https://www.jma.go.jp/bosai/forecast/data/forecast/"
 json: str = '.json'
 location_map = {
-    "大阪": "270000",
-    "奈良": "290000",
-    "三重": "240000",
+    "大阪": 270000,
+    "奈良": 290000,
+    "三重": 240000,
 }
 
-def extract_value_from_map(input: str, location_map: map) -> str:
+
+def extract_value_from_map(input: str, location_map: map) -> int | None:
     if input in location_map:
         return location_map[input]
     else:
         print('エラー extract_value_from_map')
         return None
+
+
 class Weather_JP(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -33,8 +38,9 @@ class Weather_JP(commands.Cog):
         else:
             await ctx.respond('天気情報を取得できませんでした。')
 
-def get_weather(location: str):
-    jma_json = requests.get(f"{url}{extract_value_from_map(location, location_map)}{json}").json()
+
+def get_weather(location_code: int):
+    jma_json = requests.get(f"{url}{location_code}{json}").json()
     weather_data = []
     for i in range(3):
         time = f'{jma_json[0]["timeSeries"][0]["timeDefines"][i]}'
@@ -44,6 +50,3 @@ def get_weather(location: str):
             'weather': weather.replace('　', '')
         })
     return weather_data
-
-
-
