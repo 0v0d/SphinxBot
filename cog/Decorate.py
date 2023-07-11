@@ -8,6 +8,5 @@ class DecorateText(commands.Cog):
 
     @commands.slash_command()
     async def decorate_code(self, ctx, language: discord.Option(str,
-                                                                choices=['py', 'cpp', 'cs', 'java', 'cs', 'ts', 'js',
-                                                                         'md', 'diff']), code: str):
+    choices=['py', 'cpp', 'cs', 'java', 'cs', 'ts', 'js','md', 'diff']), code: str):
         await ctx.respond(f'```{language}\n{code}\n```')
