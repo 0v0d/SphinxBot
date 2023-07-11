@@ -4,6 +4,8 @@ import discord
 import requests as requests
 from discord.ext import commands
 
+from cog.Utility import extract_value_from_map
+
 url: str = "https://www.jma.go.jp/bosai/forecast/data/forecast/"
 json: str = '.json'
 location_map = {
@@ -11,14 +13,6 @@ location_map = {
     "奈良": 290000,
     "三重": 240000,
 }
-
-
-def extract_value_from_map(input: str, location_map: map) -> int | None:
-    if input in location_map:
-        return location_map[input]
-    else:
-        print('エラー extract_value_from_map')
-        return None
 
 
 class Weather_JP(commands.Cog):
