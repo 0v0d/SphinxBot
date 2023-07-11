@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 API_KEY = os.environ.get("API_KEY")
-url = "http://api.openweathermap.org/data/2.5/"
+url:str = "http://api.openweathermap.org/data/2.5/"
 
 
 class Weather(commands.Cog):
