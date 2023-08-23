@@ -1,7 +1,7 @@
 import os
 
 import discord
-
+#from dotenv import load_dotenv
 from Keep_Alive import keep_alive
 from cog.Decorate import DecorateText
 from cog.Random import Random
@@ -26,4 +26,5 @@ bot.add_cog(Weather(bot))
 bot.add_cog(DecorateText(bot))
 bot.add_cog(Weather_JP(bot))
 keep_alive()
+#load_dotenv()
 bot.run(os.getenv("DISCORD_BOT_TOKEN"))
