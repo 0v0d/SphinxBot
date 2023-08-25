@@ -40,15 +40,19 @@ class Weather_JP(commands.Cog):
 def get_weather(location_code: int):
   jma_json = requests.get(f"{url}{location_code}{json}").json()
   weather_data = []
-  days: int = len(jma_json[0]["timeSeries"][0]["timeDefines"])
-  areas: int = len(jma_json[0]["timeSeries"][0]["areas"])
-  for day in range(days):
-    time = f'{jma_json[0]["timeSeries"][0]["timeDefines"][day]}'
-    for area_num in range(areas):
-      area_name = f'{jma_json[0]["timeSeries"][0]["areas"][area_num]["area"]["name"]}'
-      weather = f'{jma_json[0]["timeSeries"][0]["areas"][area_num]["weathers"][day]}'
+  time_series = jma_json[0]["timeSeries"][0]
+  time_defines = time_series["timeDefines"]
+  areas = time_series["areas"]
+
+  for day in range(len(time_defines)):
+    time_define = time_defines[day]
+    formatted_time = f'{time_define}'
+    for area_num in range(len(areas)):
+      area_data = areas[area_num]
+      area_name = f'{area_data["area"]["name"]}'
+      weather = f'{area_data["weathers"][day]}'
       weather_data.append({
-        'time': f"{time[:10]} {time[11:16]}",
+        'time': f"{formatted_time[:10]}{formatted_time[11:16]}",
         'area_name': area_name.replace('　', ''),
         'weather': weather.replace('　', '')
       })
