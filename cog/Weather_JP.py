@@ -30,7 +30,8 @@ class Weather_JP(commands.Cog):
       for data in weather_data:
         time = data['time']
         weather = data['weather']
-        embed.add_field(name=time, value=f"天気: {weather}", inline=False)
+        area = data['area_name']
+        embed.add_field(name=time, value=f"{area}の天気: {weather}", inline=False)
       await ctx.respond(embed=embed)
     else:
       await ctx.respond('天気情報を取得できませんでした。')
@@ -39,12 +40,16 @@ class Weather_JP(commands.Cog):
 def get_weather(location_code: int):
   jma_json = requests.get(f"{url}{location_code}{json}").json()
   weather_data = []
-  range_: int = len(jma_json[0]["timeSeries"][0]["timeDefines"])
-  for i in range(range_):
-    time = f'{jma_json[0]["timeSeries"][0]["timeDefines"][i]}'
-    weather = f'{jma_json[0]["timeSeries"][0]["areas"][0]["weathers"][i]}'
-    weather_data.append({
-      'time': f"{time[:10]} {time[11:16]}",
-      'weather': weather.replace('　', '')
-    })
+  days: int = len(jma_json[0]["timeSeries"][0]["timeDefines"])
+  areas: int = len(jma_json[0]["timeSeries"][0]["areas"])
+  for day in range(days):
+    time = f'{jma_json[0]["timeSeries"][0]["timeDefines"][day]}'
+    for area_num in range(areas):
+      area_name = f'{jma_json[0]["timeSeries"][0]["areas"][area_num]["area"]["name"]}'
+      weather = f'{jma_json[0]["timeSeries"][0]["areas"][area_num]["weathers"][day]}'
+      weather_data.append({
+        'time': f"{time[:10]} {time[11:16]}",
+        'area_name': area_name.replace('　', ''),
+        'weather': weather.replace('　', '')
+      })
   return weather_data
