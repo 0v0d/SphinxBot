@@ -52,7 +52,7 @@ def get_weather(location_code: int):
       area_name = f'{area_data["area"]["name"]}'
       weather = f'{area_data["weathers"][day]}'
       weather_data.append({
-        'time': f"{formatted_time[:10]}{formatted_time[11:16]}",
+        'time': f"{formatted_time[:10]} {formatted_time[11:16]}",
         'area_name': area_name.replace('　', ''),
         'weather': weather.replace('　', '')
       })
