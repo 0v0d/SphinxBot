@@ -51,7 +51,7 @@ class Weather(commands.Cog):
 
 def get_weather(location):
   response = requests.get(
-    f'{url}weather?q={location}&units=metric&appid={API_KEY}')
+    f'{url}weather?lang=ja&q={location}&units=metric&appid={API_KEY}')
   if response.status_code == 200:
     return response.json()
   else:
@@ -61,7 +61,7 @@ def get_weather(location):
 
 def get_daily_weather(location):
   response = requests.get(
-    f"{url}forecast?q={location}&units=metric&appid={API_KEY}")
+    f"{url}forecast?lang=ja&q={location}&units=metric&appid={API_KEY}")
   if response.status_code == 200:
     data = response.json()
     weather_data = []
